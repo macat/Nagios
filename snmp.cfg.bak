@@ -1,0 +1,2991 @@
+####
+## This file is managed by puppet, do not change it locally.
+## Jeff Destine
+
+
+     
+define hostgroup {
+        hostgroup_name  NPGJ2EE-Group
+        alias           NPGJ2EE
+        members         NPGJ2EE1,NPGJ2EE2,NPGJ2EE3,NPGJ2EE4,NPGJ2EE5,NPGJ2EE6,NPGJ2EE7,
+			NPGJ2EE8,NPGJ2EE9,NPGJ2EE10,NPGJ2EE11,NPGJ2EE12,NPGJ2EE13,
+                        NPGJ2EE14,NPGJ2EE15,NPGJ2EE16,NPGJ2EE17,NPGJ2EE18
+        }
+
+
+define host{
+	use		linux-server
+	host_name	NPGJ2EE1
+	alias		Nature.com
+	address		192.168.10.201
+	}
+define host{
+	use		linux-server
+	host_name	NPGJ2EE2
+	alias		Nature2
+	address		192.168.10.202
+	}
+define host{
+	use		linux-server
+	host_name	NPGJ2EE3
+	alias		Nature3
+	address		192.168.10.203
+	}
+define host{
+	use		linux-server
+	host_name	NPGJ2EE4
+	alias		Nature4
+	address		192.168.10.204
+	}
+define host{
+	use		linux-server
+	host_name	NPGJ2EE5
+	alias		Nature5
+	address		192.168.10.41
+	}
+define host{
+	use		linux-server
+	host_name	NPGJ2EE6
+	alias		Nature6
+	address		192.168.10.40
+	}
+define host{
+	use		linux-server
+	host_name	NPGJ2EE7
+	alias		Nature7
+	address		192.168.10.33
+	}
+define host{
+	use		linux-server
+	host_name	NPGJ2EE8
+	alias		Nature8
+	address		192.168.10.84
+	}
+define host{
+	use		linux-server
+	host_name	NPGJ2EE9
+	alias 		Nature9
+	address		192.168.10.88
+	}
+define host{
+	use		linux-server
+	host_name	NPGJ2EE10
+	alias		Nature10
+	address		192.168.10.39
+	}
+define host{
+	use		linux-server
+	host_name	NPGJ2EE11
+	alias		Nature11
+	address		192.168.10.48
+	}
+define	host{
+	use		linux-server
+	host_name	NPGJ2EE12
+	alias		Nature12
+	address		192.168.10.49
+	}
+define	host{
+	use		linux-server
+	host_name	NPGJ2EE13
+	alias		Nature13
+	address		192.168.10.61
+	}
+define host{
+	use		linux-server
+	host_name	NPGJ2EE14
+	alias		Nature14
+	address		192.168.10.62
+	}
+define	host{
+	use		linux-server
+	host_name	NPGJ2EE15
+	alias		Nature15
+	address		192.168.10.63
+	}
+define host{
+	use		linux-server
+	host_name	NPGJ2EE16
+	alias		Nature16
+	address		192.168.10.64
+	}
+define host{
+	use		linux-server
+	host_name	NPGJ2EE17
+	alias		Nature17
+	address		192.168.10.82
+	}
+define host{
+	use		linux-server
+	host_name	 NPGJ2EE18
+	alias		Nature18
+	address		192.168.10.66
+	}
+### SNMP Services ###
+define service{
+        use                             generic-service        ; Name of service template to use
+        host_name                       NPGJ2EE1
+        service_description             PING
+        check_command                   check_ping!100.0,20%!500.0,60%
+        }
+define service{
+        use                             local-service         ; Name of service template to use
+        host_name                       NPGJ2EE1
+        service_description             Disk Space
+        check_command                   check_local_disk!20%!10%!/
+        }
+#define service{
+#	use		generic-service
+#	host_name	NPGJ2EE1
+#	check_command	check_snmp_process!npgmon -n httpd -w 3,8 -c 0,9
+#	service_description SNMP Apache Processes
+#	}
+#define service{
+#	use		generic-service
+#	host_name	NPGJ2EE1
+#	check_command	check_snmp_load!public!90% !95%
+#	service_description SNMP CPU usage
+#	}
+define service{
+	host_name		NPGJ2EE1
+	service_description	URL: www.nature.com/news/2010/100630/full/news.2010.322.html
+	check_command		check_http_url!http://www.nature.com/news/2010/100630/full/news.2010.322.html
+	max_check_attempts	5
+	check_interval		3
+	retry_interval		1
+	check_period		24x7
+	notification_period	24x7
+	}
+define service{
+	host_name		NPGJ2EE1
+	service_description	URL: www.nature.com
+	check_command		check_http_url!http://www.nature.com
+	max_check_attempts	5
+	check_interval		3
+	retry_interval		1
+	check_period		24x7
+	notification_period	24x7
+	}
+define service{
+	host_name		NPGJ2EE1
+	service_description	URL: Archive nature Journal Current Issue
+	check_command		check_http_url!http://www.nature.com/nature/journal/v453/n7194/index.html
+	max_check_attempts	5
+	check_interval		3
+	retry_interval		1
+	check_period		24x7
+	notification_period	24x7
+	}
+ define service{
+       host_name               NPGJ2EE1
+       service_description     URL: Nature Current Journal Issue
+       check_command           check_http_url!http://www.nature.com/nature/current_issue.html
+       max_check_attempts      5
+       check_interval          3
+       retry_interval          3
+       check_period            24x7
+       notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE1
+        service_description     URL: AJ Journal British
+        check_command		check_http_url!http://www.nature.com/bjc/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+	}
+define service{
+        host_name               NPGJ2EE1
+        service_description     URL: AJ Journal British AOP
+        check_command           check_http_url!http://www.nature.com/bjc/journal/vaop/ncurrent/index.hml
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE1
+        service_description     URL: AJ Journal British Polopoly
+        check_command           check_http_url!http://www.nature.com/nphys/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE1
+        service_description     URL: AJ Journal British MarkLogic
+        check_command           check_http_url!http://www.nature.com/nclimate/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE1
+        service_description     URL: Nature Article
+        check_command           check_http_url!http://www.nature.com/nature/journal/v495/n7440/full/nature11968.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE1
+        service_description     URL: Nature Article Legacy
+        check_command           check_http_url!http://www.nature.com/bjc/journal/v101/n10/full/6605375a.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+	}
+define service{
+        host_name               NPGJ2EE1
+        service_description     URL: Nature Journal Subscription page
+        max_check_attempts      5
+	check_command		check_http_url!http://www.nature.com/ecommerce/subscribe.action?productId=nature
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE1
+        service_description     URL: News Article using XB3
+        check_command           check_http_url!http://www.nature.com/news/2009/093223/full/news.2009.1159.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE1
+        service_description     URL: Nature Advanced Search
+        check_command           check_http_url!http://www.nature.com/search/adv_search
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE1
+        service_description     URL: Nature Search Results
+        check_command           check_http_url!http://www.nature.com/search/executeSearch?sp-q=cancer
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+ define service{
+        host_name               NPGJ2EE1
+        service_description     URL: Nature News Page
+        check_command           check_http_url!http://www.nature.com/news/
+         max_check_attempts      5
+           check_interval          3
+            retry_interval          3
+            check_period            24x7
+             notification_period     24x7
+            }
+define service{
+        hostgroup_name               NPGJ2EE
+        service_description     URL: Palgraveconnect Homepage
+        check_command           check_http_url!http://www.palgraveconnect.com/pc/index.html
+         max_check_attempts      5
+           check_interval          3
+            retry_interval          3
+            check_period            24x7
+             notification_period     24x7
+            }
+define service{
+        hostgroup_name               NPGJ2EE
+        service_description     URL: Palgraveconnect Catalog
+        check_command           check_http_url!http://www.palgraveconnect.com/pc/browse/catalog
+         max_check_attempts      5
+           check_interval          3
+            retry_interval          3
+            check_period            24x7
+             notification_period     24x7
+            }
+define service{
+        hostgroup_name               NPGJ2EE
+        service_description     URL: Palgraveconnect Advanced Page
+        check_command           check_http_url!http://www.palgraveconnect.com/pc/browse/search/advanced?new=y
+         max_check_attempts      5
+           check_interval          3
+            retry_interval          3
+            check_period            24x7
+             notification_period     24x7
+            }
+define service{
+        hostgroup_name               NPGJ2EE
+        service_description     URL: Palgraveconnect ISBN page
+        check_command           check_http_url!http://www.palgraveconnect.com/pc/doifinder/10.1057/9780230234956
+         max_check_attempts      5
+           check_interval          3
+            retry_interval          3
+            check_period            24x7
+             notification_period     24x7
+            }
+#define service{
+#        host_name               NPGJ2EE1
+#        service_description     URL: Palgraveconnect Athense Login
+#        check_command           check_http_url!http://www.palgraveconnect.com/pc/foxtrot/svc/institutelogin?target=/index.html
+#         max_check_attempts      5
+#           check_interval          3
+#            retry_interval          3
+#            check_period            24x7
+#             notification_period     24x7
+#            }
+
+define service{
+	host_name		NPGJ2EE2
+	service_description     URL: www.nature.com/news/2010/100630/full/news.2010.322.html
+        check_command   check_http_url!http://www.nature.com/news/2010/100630/full/news.2010.322.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+	}
+define service{
+        host_name               NPGJ2EE2
+        service_description     URL: www.nature.com
+        check_command           check_http_url!http://www.nature.com
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+ define service{
+             host_name               NPGJ2EE2
+             service_description     URL: Nautre Journal Current Issue Page
+             check_command           check_http_url!http://www.nature.com/nature/current_issue.html
+            max_check_attempts      5
+            check_interval          3
+            retry_interval          3
+            check_period            24x7
+             notification_period     24x7
+            }
+
+define service{
+        host_name               NPGJ2EE2
+        service_description     URL: Archive nature Journal Current Issue
+        check_command           check_http_url!http://www.nature.com/nature/journal/v453/n7194/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE2
+        service_description     URL: AJ Journal British
+        check_command           check_http_url!http://www.nature.com/bjc/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE2
+        service_description     URL: AJ Journal British AOP
+        check_command           check_http_url!http://www.nature.com/bjc/journal/vaop/ncurrent/index.hml
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE2
+        service_description     URL: AJ Journal British Polopoly
+        check_command           check_http_url!http://www.nature.com/nphys/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE2
+        service_description     URL: AJ Journal British MarkLogic
+        check_command           check_http_url!http://www.nature.com/nclimate/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE2
+        service_description     URL: Nature Article
+        check_command           check_http_url!http://www.nature.com/nature/journal/v495/n7440/full/nature11968.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE2
+        service_description     URL: Nature Article Legacy
+        check_command           check_http_url!http://www.nature.com/bjc/journal/v101/n10/full/6605375a.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+
+define service{
+	host_name		NPGJ2EE2
+	service_description     URL: Nature Subscription Page
+        check_command   check_http_url!http://www.nature.com/ecommerce/subscribe.action?productId=nature
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+	}
+ define service{
+             host_name               NPGJ2EE2
+             service_description     URL: Nature News Homepage
+             check_command           check_http_url!http://www.nature.com/news/
+            max_check_attempts      5
+            check_interval          3
+            retry_interval          3
+             check_period            24x7
+             notification_period     24x7
+             }
+ define service{
+            host_name               NPGJ2EE2
+             service_description     URL: News Article using XB3
+             check_command           check_http_url!http://www.nature.com/news/2009/091223/full/news.2009.1159.html
+             max_check_attempts      5
+            check_interval          3
+            retry_interval          3
+             check_period            24x7
+             notification_period     24x7
+            }
+ define service{
+            host_name               NPGJ2EE2
+             service_description     URL: Advanced search Page
+             check_command           check_http_url!http://www.nature.com/search/adv_search
+            max_check_attempts      5
+             check_interval          3
+             retry_interval          3
+             check_period            24x7
+             notification_period     24x7
+             }
+ define service{
+            host_name               NPGJ2EE2
+             service_description     URL: Search Results Page
+             check_command           check_http_url!http://www.nature.com/search/executeSearch?sp-q=cancer
+             max_check_attempts      5
+             check_interval          3
+             retry_interval          3
+             check_period            24x7
+            notification_period     24x7
+             }
+define service{
+        host_name               NPGJ2EE3
+        service_description     URL: www.nature.com/news/2010/100630/full/news.2010.322.html
+        check_command           check_http_url!http://www.nature.com/news/2010/100630/full/news.2010.322.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE3
+        service_description     URL: www.nature.com
+        check_command           check_http_url!http://www.nature.com
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE3
+        service_description     URL: Archive nature Journal Current Issue
+        check_command           check_http_url!http://www.nature.com/nature/journal/v453/n7194/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+ define service{
+       host_name               NPGJ2EE3
+       service_description     URL: Nature Current Journal Issue
+       check_command           check_http_url!http://www.nature.com/nature/current_issue.html
+       max_check_attempts      5
+       check_interval          3
+       retry_interval          3
+       check_period            24x7
+       notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE3
+        service_description     URL: AJ Journal British
+        check_command           check_http_url!http://www.nature.com/bjc/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE3
+        service_description     URL: AJ Journal British AOP
+        check_command           check_http_url!http://www.nature.com/bjc/journal/vaop/ncurrent/index.hml
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE3
+        service_description     URL: AJ Journal British Polopoly
+        check_command           check_http_url!http://www.nature.com/nphys/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE3
+        service_description     URL: AJ Journal British MarkLogic
+        check_command           check_http_url!http://www.nature.com/nclimate/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE3
+        service_description     URL: Nature Article
+        check_command           check_http_url!http://www.nature.com/nature/journal/v495/n7440/full/nature11968.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE3
+        service_description     URL: Nature Article Legacy
+        check_command           check_http_url!http://www.nature.com/bjc/journal/v101/n10/full/6605375a.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+ notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE3
+        service_description     URL: Nature Journal Subscription page
+        max_check_attempts      5
+        check_command           check_http_url!http://www.nature.com/ecommerce/subscribe.action?productId=nature
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE3
+        service_description     URL: News Article using XB3
+        check_command           check_http_url!http://www.nature.com/news/2009/091223/full/news.2009.1159.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE3
+        service_description     URL: Nature Advanced Search
+        check_command           check_http_url!http://www.nature.com/search/adv_search
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE3
+        service_description     URL: Nature Search Results
+        check_command           check_http_url!http://www.nature.com/search/executeSearch?sp-q=cancer
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+ define service{
+        host_name               NPGJ2EE3
+        service_description     URL: Nature News Page
+        check_command           check_http_url!http://www.nature.com/news/
+         max_check_attempts      5
+           check_interval          3
+            retry_interval          3
+            check_period            24x7
+             notification_period     24x7
+            }
+define service{
+        host_name               NPGJ2EE3
+        service_description     URL: www.nature.com/news/2010/100630/full/news.2010.322.html
+        check_command   check_http_url!http://www.nature.com/news/2010/100630/full/news.2010.322.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE4
+        service_description     URL: www.nature.com/news/2010/100630/full/news.2010.322.html
+        check_command           check_http_url!http://www.nature.com/news/2010/100630/full/news.2010.322.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE4
+        service_description     URL: www.nature.com
+        check_command           check_http_url!http://www.nature.com
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE4
+        service_description     URL: Archive nature Journal Current Issue
+        check_command           check_http_url!http://www.nature.com/nature/journal/v453/n7194/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+ define service{
+       host_name               NPGJ2EE4
+       service_description     URL: Nature Current Journal Issue
+       check_command           check_http_url!http://www.nature.com/nature/current_issue.html
+       max_check_attempts      5
+       check_interval          3
+       retry_interval          3
+       check_period            24x7
+       notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE4
+        service_description     URL: AJ Journal British
+        check_command           check_http_url!http://www.nature.com/bjc/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE4
+        service_description     URL: AJ Journal British AOP
+        check_command           check_http_url!http://www.nature.com/bjc/journal/vaop/ncurrent/index.hml
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE4
+        service_description     URL: AJ Journal British Polopoly
+        check_command           check_http_url!http://www.nature.com/nphys/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE4
+        service_description     URL: AJ Journal British MarkLogic
+        check_command           check_http_url!http://www.nature.com/nclimate/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE4
+        service_description     URL: Nature Article
+        check_command           check_http_url!http://www.nature.com/nature/journal/v495/n7440/full/nature11968.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE4
+        service_description     URL: Nature Article Legacy
+        check_command           check_http_url!http://www.nature.com/bjc/journal/v101/n10/full/6605375a.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+ notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE4
+        service_description     URL: Nature Journal Subscription page
+        max_check_attempts      5
+        check_command           check_http_url!http://www.nature.com/ecommerce/subscribe.action?productId=nature
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE4
+        service_description     URL: News Article using XB3
+        check_command           check_http_url!http://www.nature.com/news/2009/091223/full/news.2009.1159.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE4
+        service_description     URL: Nature Advanced Search
+        check_command           check_http_url!http://www.nature.com/search/adv_search
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE4
+        service_description     URL: Nature Search Results
+        check_command           check_http_url!http://www.nature.com/search/executeSearch?sp-q=cancer
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+ define service{
+        host_name               NPGJ2EE4
+        service_description     URL: Nature News Page
+        check_command           check_http_url!http://www.nature.com/news/
+         max_check_attempts      5
+           check_interval          3
+            retry_interval          3
+            check_period            24x7
+             notification_period     24x7
+            }
+define service{
+        host_name               NPGJ2EE4
+        service_description     URL: www.nature.com/news/2010/100630/full/news.2010.322.html
+        check_command   check_http_url!http://www.nature.com/news/2010/100630/full/news.2010.322.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE5
+        service_description     URL: www.nature.com/news/2010/100630/full/news.2010.322.html
+        check_command           check_http_url!http://www.nature.com/news/2010/100630/full/news.2010.322.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE5
+        service_description     URL: www.nature.com
+        check_command           check_http_url!http://www.nature.com
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE5
+        service_description     URL: Archive nature Journal Current Issue
+        check_command           check_http_url!http://www.nature.com/nature/journal/v453/n7194/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+ define service{
+       host_name               NPGJ2EE5
+       service_description     URL: Nature Current Journal Issue
+       check_command           check_http_url!http://www.nature.com/nature/current_issue.html
+       max_check_attempts      5
+       check_interval          3
+       retry_interval          3
+       check_period            24x7
+       notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE5
+        service_description     URL: AJ Journal British
+        check_command           check_http_url!http://www.nature.com/bjc/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE5
+        service_description     URL: AJ Journal British AOP
+        check_command           check_http_url!http://www.nature.com/bjc/journal/vaop/ncurrent/index.hml
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE5
+        service_description     URL: AJ Journal British Polopoly
+        check_command           check_http_url!http://www.nature.com/nphys/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE5
+        service_description     URL: AJ Journal British MarkLogic
+        check_command           check_http_url!http://www.nature.com/nclimate/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE5
+        service_description     URL: Nature Article
+        check_command           check_http_url!http://www.nature.com/nature/journal/v495/n7440/full/nature11968.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE5
+        service_description     URL: Nature Article Legacy
+        check_command           check_http_url!http://www.nature.com/bjc/journal/v101/n10/full/6605375a.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+ notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE5
+        service_description     URL: Nature Journal Subscription page
+        max_check_attempts      5
+        check_command           check_http_url!http://www.nature.com/ecommerce/subscribe.action?productId=nature
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE5
+        service_description     URL: News Article using XB3
+        check_command           check_http_url!http://www.nature.com/news/2009/091223/full/news.2009.1159.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE5
+        service_description     URL: Nature Advanced Search
+        check_command           check_http_url!http://www.nature.com/search/adv_search
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE5
+        service_description     URL: Nature Search Results
+        check_command           check_http_url!http://www.nature.com/search/executeSearch?sp-q=cancer
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+ define service{
+        host_name               NPGJ2EE5
+        service_description     URL: Nature News Page
+        check_command           check_http_url!http://www.nature.com/news/
+         max_check_attempts      5
+           check_interval          3
+            retry_interval          3
+            check_period            24x7
+             notification_period     24x7
+            }
+define service{
+        host_name               NPGJ2EE5
+        service_description     URL: www.nature.com/news/2010/100630/full/news.2010.322.html
+        check_command   check_http_url!http://www.nature.com/news/2010/100630/full/news.2010.322.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE7
+        service_description     URL: www.nature.com/news/2010/100630/full/news.2010.322.html
+        check_command           check_http_url!http://www.nature.com/news/2010/100630/full/news.2010.322.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE7
+        service_description     URL: www.nature.com
+        check_command           check_http_url!http://www.nature.com
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE7
+        service_description     URL: Archive nature Journal Current Issue
+        check_command           check_http_url!http://www.nature.com/nature/journal/v453/n7194/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+ define service{
+       host_name               NPGJ2EE7
+       service_description     URL: Nature Current Journal Issue
+       check_command           check_http_url!http://www.nature.com/nature/current_issue.html
+       max_check_attempts      5
+       check_interval          3
+       retry_interval          3
+       check_period            24x7
+       notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE7
+        service_description     URL: AJ Journal British
+        check_command           check_http_url!http://www.nature.com/bjc/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE7
+        service_description     URL: AJ Journal British AOP
+        check_command           check_http_url!http://www.nature.com/bjc/journal/vaop/ncurrent/index.hml
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE7
+        service_description     URL: AJ Journal British Polopoly
+        check_command           check_http_url!http://www.nature.com/nphys/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE7
+        service_description     URL: AJ Journal British MarkLogic
+        check_command           check_http_url!http://www.nature.com/nclimate/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE7
+        service_description     URL: Nature Article
+        check_command           check_http_url!http://www.nature.com/nature/journal/v495/n7440/full/nature11968.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE7
+        service_description     URL: Nature Article Legacy
+        check_command           check_http_url!http://www.nature.com/bjc/journal/v101/n10/full/6605375a.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+ notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE7
+        service_description     URL: Nature Journal Subscription page
+        max_check_attempts      5
+        check_command           check_http_url!http://www.nature.com/ecommerce/subscribe.action?productId=nature
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE7
+        service_description     URL: News Article using XB3
+        check_command           check_http_url!http://www.nature.com/news/2009/091223/full/news.2009.1159.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE7
+        service_description     URL: Nature Advanced Search
+        check_command           check_http_url!http://www.nature.com/search/adv_search
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE7
+        service_description     URL: Nature Search Results
+        check_command           check_http_url!http://www.nature.com/search/executeSearch?sp-q=cancer
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+ define service{
+        host_name               NPGJ2EE7
+        service_description     URL: Nature News Page
+        check_command           check_http_url!http://www.nature.com/news/
+         max_check_attempts      5
+           check_interval          3
+            retry_interval          3
+            check_period            24x7
+             notification_period     24x7
+            }
+define service{
+        host_name               NPGJ2EE7
+        service_description     URL: www.nature.com/news/2010/100630/full/news.2010.322.html
+        check_command   check_http_url!http://www.nature.com/news/2010/100630/full/news.2010.322.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE8
+        service_description     URL: www.nature.com/news/2010/100630/full/news.2010.322.html
+        check_command           check_http_url!http://www.nature.com/news/2010/100630/full/news.2010.322.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE8
+        service_description     URL: www.nature.com
+        check_command           check_http_url!http://www.nature.com
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE8
+        service_description     URL: Archive nature Journal Current Issue
+        check_command           check_http_url!http://www.nature.com/nature/journal/v453/n7194/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+ define service{
+       host_name               NPGJ2EE8
+       service_description     URL: Nature Current Journal Issue
+       check_command           check_http_url!http://www.nature.com/nature/current_issue.html
+       max_check_attempts      5
+       check_interval          3
+       retry_interval          3
+       check_period            24x7
+       notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE8
+        service_description     URL: AJ Journal British
+        check_command           check_http_url!http://www.nature.com/bjc/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE8
+        service_description     URL: AJ Journal British AOP
+        check_command           check_http_url!http://www.nature.com/bjc/journal/vaop/ncurrent/index.hml
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE8
+        service_description     URL: AJ Journal British Polopoly
+        check_command           check_http_url!http://www.nature.com/nphys/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE8
+        service_description     URL: AJ Journal British MarkLogic
+        check_command           check_http_url!http://www.nature.com/nclimate/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE8
+        service_description     URL: Nature Article
+        check_command           check_http_url!http://www.nature.com/nature/journal/v495/n7440/full/nature11968.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE8
+        service_description     URL: Nature Article Legacy
+        check_command           check_http_url!http://www.nature.com/bjc/journal/v101/n10/full/6605375a.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+ notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE8
+        service_description     URL: Nature Journal Subscription page
+        max_check_attempts      5
+        check_command           check_http_url!http://www.nature.com/ecommerce/subscribe.action?productId=nature
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE8
+        service_description     URL: News Article using XB3
+        check_command           check_http_url!http://www.nature.com/news/2009/091223/full/news.2009.1159.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE8
+        service_description     URL: Nature Advanced Search
+        check_command           check_http_url!http://www.nature.com/search/adv_search
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE8
+        service_description     URL: Nature Search Results
+        check_command           check_http_url!http://www.nature.com/search/executeSearch?sp-q=cancer
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+ define service{
+        host_name               NPGJ2EE8
+        service_description     URL: Nature News Page
+        check_command           check_http_url!http://www.nature.com/news/
+         max_check_attempts      5
+           check_interval          3
+            retry_interval          3
+            check_period            24x7
+             notification_period     24x7
+            }
+define service{
+        host_name               NPGJ2EE8
+        service_description     URL: www.nature.com/news/2010/100630/full/news.2010.322.html
+        check_command   check_http_url!http://www.nature.com/news/2010/100630/full/news.2010.322.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE9
+        service_description     URL: www.nature.com/news/2010/100630/full/news.2010.322.html
+        check_command           check_http_url!http://www.nature.com/news/2010/100630/full/news.2010.322.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE9
+        service_description     URL: www.nature.com
+        check_command           check_http_url!http://www.nature.com
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE9
+        service_description     URL: Archive nature Journal Current Issue
+        check_command           check_http_url!http://www.nature.com/nature/journal/v453/n7194/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+ define service{
+       host_name               NPGJ2EE9
+       service_description     URL: Nature Current Journal Issue
+       check_command           check_http_url!http://www.nature.com/nature/current_issue.html
+       max_check_attempts      5
+       check_interval          3
+       retry_interval          3
+       check_period            24x7
+       notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE9
+        service_description     URL: AJ Journal British
+        check_command           check_http_url!http://www.nature.com/bjc/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE9
+        service_description     URL: AJ Journal British AOP
+        check_command           check_http_url!http://www.nature.com/bjc/journal/vaop/ncurrent/index.hml
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE9
+        service_description     URL: AJ Journal British Polopoly
+        check_command           check_http_url!http://www.nature.com/nphys/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE9
+        service_description     URL: AJ Journal British MarkLogic
+        check_command           check_http_url!http://www.nature.com/nclimate/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE9
+        service_description     URL: Nature Article
+        check_command           check_http_url!http://www.nature.com/nature/journal/v495/n7440/full/nature11968.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE9
+        service_description     URL: Nature Article Legacy
+        check_command           check_http_url!http://www.nature.com/bjc/journal/v101/n10/full/6605375a.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+ notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE9
+        service_description     URL: Nature Journal Subscription page
+        max_check_attempts      5
+        check_command           check_http_url!http://www.nature.com/ecommerce/subscribe.action?productId=nature
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE9
+        service_description     URL: News Article using XB3
+        check_command           check_http_url!http://www.nature.com/news/2009/091223/full/news.2009.1159.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE9
+        service_description     URL: Nature Advanced Search
+        check_command           check_http_url!http://www.nature.com/search/adv_search
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE9
+        service_description     URL: Nature Search Results
+        check_command           check_http_url!http://www.nature.com/search/executeSearch?sp-q=cancer
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+ define service{
+        host_name               NPGJ2EE9
+        service_description     URL: Nature News Page
+        check_command           check_http_url!http://www.nature.com/news/
+         max_check_attempts      5
+           check_interval          3
+            retry_interval          3
+            check_period            24x7
+             notification_period     24x7
+            }
+define service{
+        host_name               NPGJ2EE9
+        service_description     URL: www.nature.com/news/2010/100630/full/news.2010.322.html
+        check_command   check_http_url!http://www.nature.com/news/2010/100630/full/news.2010.322.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE10
+        service_description     URL: www.nature.com/news/2010/100630/full/news.2010.322.html
+        check_command           check_http_url!http://www.nature.com/news/2010/100630/full/news.2010.322.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE10
+        service_description     URL: www.nature.com
+        check_command           check_http_url!http://www.nature.com
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE10
+        service_description     URL: Archive nature Journal Current Issue
+        check_command           check_http_url!http://www.nature.com/nature/journal/v453/n7194/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+ define service{
+       host_name               NPGJ2EE10
+       service_description     URL: Nature Current Journal Issue
+       check_command           check_http_url!http://www.nature.com/nature/current_issue.html
+       max_check_attempts      5
+       check_interval          3
+       retry_interval          3
+       check_period            24x7
+       notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE10
+        service_description     URL: AJ Journal British
+        check_command           check_http_url!http://www.nature.com/bjc/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE10
+        service_description     URL: AJ Journal British AOP
+        check_command           check_http_url!http://www.nature.com/bjc/journal/vaop/ncurrent/index.hml
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE10
+        service_description     URL: AJ Journal British Polopoly
+        check_command           check_http_url!http://www.nature.com/nphys/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE10
+        service_description     URL: AJ Journal British MarkLogic
+        check_command           check_http_url!http://www.nature.com/nclimate/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE10
+        service_description     URL: Nature Article
+        check_command           check_http_url!http://www.nature.com/nature/journal/v495/n7440/full/nature11968.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE10
+        service_description     URL: Nature Article Legacy
+        check_command           check_http_url!http://www.nature.com/bjc/journal/v101/n10/full/6605375a.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+ notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE10
+        service_description     URL: Nature Journal Subscription page
+        max_check_attempts      5
+        check_command           check_http_url!http://www.nature.com/ecommerce/subscribe.action?productId=nature
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE10
+        service_description     URL: News Article using XB3
+        check_command           check_http_url!http://www.nature.com/news/2009/091223/full/news.2009.1159.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE10
+        service_description     URL: Nature Advanced Search
+        check_command           check_http_url!http://www.nature.com/search/adv_search
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE10
+        service_description     URL: Nature Search Results
+        check_command           check_http_url!http://www.nature.com/search/executeSearch?sp-q=cancer
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+ define service{
+        host_name               NPGJ2EE10
+        service_description     URL: Nature News Page
+        check_command           check_http_url!http://www.nature.com/news/
+         max_check_attempts      5
+           check_interval          3
+            retry_interval          3
+            check_period            24x7
+             notification_period     24x7
+            }
+define service{
+        host_name               NPGJ2EE10
+        service_description     URL: www.nature.com/news/2010/100630/full/news.2010.322.html
+        check_command   check_http_url!http://www.nature.com/news/2010/100630/full/news.2010.322.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE11
+        service_description     URL: www.nature.com/news/2010/100630/full/news.2010.322.html
+        check_command           check_http_url!http://www.nature.com/news/2010/100630/full/news.2010.322.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE11
+        service_description     URL: www.nature.com
+        check_command           check_http_url!http://www.nature.com
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE11
+        service_description     URL: Archive nature Journal Current Issue
+        check_command           check_http_url!http://www.nature.com/nature/journal/v453/n7194/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+ define service{
+       host_name               NPGJ2EE11
+       service_description     URL: Nature Current Journal Issue
+       check_command           check_http_url!http://www.nature.com/nature/current_issue.html
+       max_check_attempts      5
+       check_interval          3
+       retry_interval          3
+       check_period            24x7
+       notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE11
+        service_description     URL: AJ Journal British
+        check_command           check_http_url!http://www.nature.com/bjc/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE11
+        service_description     URL: AJ Journal British AOP
+        check_command           check_http_url!http://www.nature.com/bjc/journal/vaop/ncurrent/index.hml
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE11
+        service_description     URL: AJ Journal British Polopoly
+        check_command           check_http_url!http://www.nature.com/nphys/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE11
+        service_description     URL: AJ Journal British MarkLogic
+        check_command           check_http_url!http://www.nature.com/nclimate/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE11
+        service_description     URL: Nature Article
+        check_command           check_http_url!http://www.nature.com/nature/journal/v495/n7440/full/nature11968.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE11
+        service_description     URL: Nature Article Legacy
+        check_command           check_http_url!http://www.nature.com/bjc/journal/v101/n10/full/6605375a.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+ notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE11
+        service_description     URL: Nature Journal Subscription page
+        max_check_attempts      5
+        check_command           check_http_url!http://www.nature.com/ecommerce/subscribe.action?productId=nature
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE11
+        service_description     URL: News Article using XB3
+        check_command           check_http_url!http://www.nature.com/news/2009/091223/full/news.2009.1159.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE11
+        service_description     URL: Nature Advanced Search
+        check_command           check_http_url!http://www.nature.com/search/adv_search
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE11
+        service_description     URL: Nature Search Results
+        check_command           check_http_url!http://www.nature.com/search/executeSearch?sp-q=cancer
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+ define service{
+        host_name               NPGJ2EE11
+        service_description     URL: Nature News Page
+        check_command           check_http_url!http://www.nature.com/news/
+         max_check_attempts      5
+           check_interval          3
+            retry_interval          3
+            check_period            24x7
+             notification_period     24x7
+            }
+define service{
+        host_name               NPGJ2EE11
+        service_description     URL: www.nature.com/news/2010/100630/full/news.2010.322.html
+        check_command   check_http_url!http://www.nature.com/news/2010/100630/full/news.2010.322.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE12
+        service_description     URL: www.nature.com/news/2010/100630/full/news.2010.322.html
+        check_command           check_http_url!http://www.nature.com/news/2010/100630/full/news.2010.322.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE12
+        service_description     URL: www.nature.com
+        check_command           check_http_url!http://www.nature.com
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE12
+        service_description     URL: Archive nature Journal Current Issue
+        check_command           check_http_url!http://www.nature.com/nature/journal/v453/n7194/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+ define service{
+       host_name               NPGJ2EE12
+       service_description     URL: Nature Current Journal Issue
+       check_command           check_http_url!http://www.nature.com/nature/current_issue.html
+       max_check_attempts      5
+       check_interval          3
+       retry_interval          3
+       check_period            24x7
+       notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE12
+        service_description     URL: AJ Journal British
+        check_command           check_http_url!http://www.nature.com/bjc/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE12
+        service_description     URL: AJ Journal British AOP
+        check_command           check_http_url!http://www.nature.com/bjc/journal/vaop/ncurrent/index.hml
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE12
+        service_description     URL: AJ Journal British Polopoly
+        check_command           check_http_url!http://www.nature.com/nphys/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE12
+        service_description     URL: AJ Journal British MarkLogic
+        check_command           check_http_url!http://www.nature.com/nclimate/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE12
+        service_description     URL: Nature Article
+        check_command           check_http_url!http://www.nature.com/nature/journal/v495/n7440/full/nature11968.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE12
+        service_description     URL: Nature Article Legacy
+        check_command           check_http_url!http://www.nature.com/bjc/journal/v101/n10/full/6605375a.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+ notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE12
+        service_description     URL: Nature Journal Subscription page
+        max_check_attempts      5
+        check_command           check_http_url!http://www.nature.com/ecommerce/subscribe.action?productId=nature
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE12
+        service_description     URL: News Article using XB3
+        check_command           check_http_url!http://www.nature.com/news/2009/091223/full/news.2009.1159.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE12
+        service_description     URL: Nature Advanced Search
+        check_command           check_http_url!http://www.nature.com/search/adv_search
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE12
+        service_description     URL: Nature Search Results
+        check_command           check_http_url!http://www.nature.com/search/executeSearch?sp-q=cancer
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+ define service{
+        host_name               NPGJ2EE12
+        service_description     URL: Nature News Page
+        check_command           check_http_url!http://www.nature.com/news/
+         max_check_attempts      5
+           check_interval          3
+            retry_interval          3
+            check_period            24x7
+             notification_period     24x7
+            }
+define service{
+        host_name               NPGJ2EE12
+        service_description     URL: www.nature.com/news/2010/100630/full/news.2010.322.html
+        check_command   check_http_url!http://www.nature.com/news/2010/100630/full/news.2010.322.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE13
+        service_description     URL: www.nature.com/news/2010/100630/full/news.2010.322.html
+        check_command           check_http_url!http://www.nature.com/news/2010/100630/full/news.2010.322.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE13
+        service_description     URL: www.nature.com
+        check_command           check_http_url!http://www.nature.com
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE13
+        service_description     URL: Archive nature Journal Current Issue
+        check_command           check_http_url!http://www.nature.com/nature/journal/v453/n7194/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+ define service{
+       host_name               NPGJ2EE13
+       service_description     URL: Nature Current Journal Issue
+       check_command           check_http_url!http://www.nature.com/nature/current_issue.html
+       max_check_attempts      5
+       check_interval          3
+       retry_interval          3
+       check_period            24x7
+       notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE13
+        service_description     URL: AJ Journal British
+        check_command           check_http_url!http://www.nature.com/bjc/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE13
+        service_description     URL: AJ Journal British AOP
+        check_command           check_http_url!http://www.nature.com/bjc/journal/vaop/ncurrent/index.hml
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE13
+        service_description     URL: AJ Journal British Polopoly
+        check_command           check_http_url!http://www.nature.com/nphys/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE13
+        service_description     URL: AJ Journal British MarkLogic
+        check_command           check_http_url!http://www.nature.com/nclimate/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE13
+        service_description     URL: Nature Article
+        check_command           check_http_url!http://www.nature.com/nature/journal/v495/n7440/full/nature11968.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE13
+        service_description     URL: Nature Article Legacy
+        check_command           check_http_url!http://www.nature.com/bjc/journal/v101/n10/full/6605375a.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+ notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE13
+        service_description     URL: Nature Journal Subscription page
+        max_check_attempts      5
+        check_command           check_http_url!http://www.nature.com/ecommerce/subscribe.action?productId=nature
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE13
+        service_description     URL: News Article using XB3
+        check_command           check_http_url!http://www.nature.com/news/2009/091223/full/news.2009.1159.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE13
+        service_description     URL: Nature Advanced Search
+        check_command           check_http_url!http://www.nature.com/search/adv_search
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE13
+        service_description     URL: Nature Search Results
+        check_command           check_http_url!http://www.nature.com/search/executeSearch?sp-q=cancer
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+ define service{
+        host_name               NPGJ2EE13
+        service_description     URL: Nature News Page
+        check_command           check_http_url!http://www.nature.com/news/
+         max_check_attempts      5
+           check_interval          3
+            retry_interval          3
+            check_period            24x7
+             notification_period     24x7
+            }
+define service{
+        host_name               NPGJ2EE13
+        service_description     URL: www.nature.com/news/2010/100630/full/news.2010.322.html
+        check_command   check_http_url!http://www.nature.com/news/2010/100630/full/news.2010.322.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE14
+        service_description     URL: www.nature.com/news/2010/100630/full/news.2010.322.html
+        check_command           check_http_url!http://www.nature.com/news/2010/100630/full/news.2010.322.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE14
+        service_description     URL: www.nature.com
+        check_command           check_http_url!http://www.nature.com
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE14
+        service_description     URL: Archive nature Journal Current Issue
+        check_command           check_http_url!http://www.nature.com/nature/journal/v453/n7194/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+ define service{
+       host_name               NPGJ2EE14
+       service_description     URL: Nature Current Journal Issue
+       check_command           check_http_url!http://www.nature.com/nature/current_issue.html
+       max_check_attempts      5
+       check_interval          3
+       retry_interval          3
+       check_period            24x7
+       notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE14
+        service_description     URL: AJ Journal British
+        check_command           check_http_url!http://www.nature.com/bjc/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE14
+        service_description     URL: AJ Journal British AOP
+        check_command           check_http_url!http://www.nature.com/bjc/journal/vaop/ncurrent/index.hml
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE14
+        service_description     URL: AJ Journal British Polopoly
+        check_command           check_http_url!http://www.nature.com/nphys/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE14
+        service_description     URL: AJ Journal British MarkLogic
+        check_command           check_http_url!http://www.nature.com/nclimate/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE14
+        service_description     URL: Nature Article
+        check_command           check_http_url!http://www.nature.com/nature/journal/v495/n7440/full/nature11968.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE14
+        service_description     URL: Nature Article Legacy
+        check_command           check_http_url!http://www.nature.com/bjc/journal/v101/n10/full/6605375a.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+ notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE14
+        service_description     URL: Nature Journal Subscription page
+        max_check_attempts      5
+        check_command           check_http_url!http://www.nature.com/ecommerce/subscribe.action?productId=nature
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE14
+        service_description     URL: News Article using XB3
+        check_command           check_http_url!http://www.nature.com/news/2009/091223/full/news.2009.1159.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE14
+        service_description     URL: Nature Advanced Search
+        check_command           check_http_url!http://www.nature.com/search/adv_search
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE14
+        service_description     URL: Nature Search Results
+        check_command           check_http_url!http://www.nature.com/search/executeSearch?sp-q=cancer
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+ define service{
+        host_name               NPGJ2EE14
+        service_description     URL: Nature News Page
+        check_command           check_http_url!http://www.nature.com/news/
+         max_check_attempts      5
+           check_interval          3
+            retry_interval          3
+            check_period            24x7
+             notification_period     24x7
+            }
+define service{
+        host_name               NPGJ2EE14
+        service_description     URL: www.nature.com/news/2010/100630/full/news.2010.322.html
+        check_command   check_http_url!http://www.nature.com/news/2010/100630/full/news.2010.322.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE15
+        service_description     URL: www.nature.com/news/2010/100630/full/news.2010.322.html
+        check_command           check_http_url!http://www.nature.com/news/2010/100630/full/news.2010.322.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE15
+        service_description     URL: www.nature.com
+        check_command           check_http_url!http://www.nature.com
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE15
+        service_description     URL: Archive nature Journal Current Issue
+        check_command           check_http_url!http://www.nature.com/nature/journal/v453/n7194/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+ define service{
+       host_name               NPGJ2EE15
+       service_description     URL: Nature Current Journal Issue
+       check_command           check_http_url!http://www.nature.com/nature/current_issue.html
+       max_check_attempts      5
+       check_interval          3
+       retry_interval          3
+       check_period            24x7
+       notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE15
+        service_description     URL: AJ Journal British
+        check_command           check_http_url!http://www.nature.com/bjc/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE15
+        service_description     URL: AJ Journal British AOP
+        check_command           check_http_url!http://www.nature.com/bjc/journal/vaop/ncurrent/index.hml
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE15
+        service_description     URL: AJ Journal British Polopoly
+        check_command           check_http_url!http://www.nature.com/nphys/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE15
+        service_description     URL: AJ Journal British MarkLogic
+        check_command           check_http_url!http://www.nature.com/nclimate/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE15
+        service_description     URL: Nature Article
+        check_command           check_http_url!http://www.nature.com/nature/journal/v495/n7440/full/nature11968.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE15
+        service_description     URL: Nature Article Legacy
+        check_command           check_http_url!http://www.nature.com/bjc/journal/v101/n10/full/6605375a.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+ notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE15
+        service_description     URL: Nature Journal Subscription page
+        max_check_attempts      5
+        check_command           check_http_url!http://www.nature.com/ecommerce/subscribe.action?productId=nature
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE15
+        service_description     URL: News Article using XB3
+        check_command           check_http_url!http://www.nature.com/news/2009/091223/full/news.2009.1159.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE15
+        service_description     URL: Nature Advanced Search
+        check_command           check_http_url!http://www.nature.com/search/adv_search
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE15
+        service_description     URL: Nature Search Results
+        check_command           check_http_url!http://www.nature.com/search/executeSearch?sp-q=cancer
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+ define service{
+        host_name               NPGJ2EE15
+        service_description     URL: Nature News Page
+        check_command           check_http_url!http://www.nature.com/news/
+         max_check_attempts      5
+           check_interval          3
+            retry_interval          3
+            check_period            24x7
+             notification_period     24x7
+            }
+define service{
+        host_name               NPGJ2EE15
+        service_description     URL: www.nature.com/news/2010/100630/full/news.2010.322.html
+        check_command   check_http_url!http://www.nature.com/news/2010/100630/full/news.2010.322.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE16
+        service_description     URL: www.nature.com/news/2010/100630/full/news.2010.322.html
+        check_command           check_http_url!http://www.nature.com/news/2010/100630/full/news.2010.322.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE16
+        service_description     URL: www.nature.com
+        check_command           check_http_url!http://www.nature.com
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE16
+        service_description     URL: Archive nature Journal Current Issue
+        check_command           check_http_url!http://www.nature.com/nature/journal/v453/n7194/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+ define service{
+       host_name               NPGJ2EE16
+       service_description     URL: Nature Current Journal Issue
+       check_command           check_http_url!http://www.nature.com/nature/current_issue.html
+       max_check_attempts      5
+       check_interval          3
+       retry_interval          3
+       check_period            24x7
+       notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE16
+        service_description     URL: AJ Journal British
+        check_command           check_http_url!http://www.nature.com/bjc/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE16
+        service_description     URL: AJ Journal British AOP
+        check_command           check_http_url!http://www.nature.com/bjc/journal/vaop/ncurrent/index.hml
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE16
+        service_description     URL: AJ Journal British Polopoly
+        check_command           check_http_url!http://www.nature.com/nphys/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE16
+        service_description     URL: AJ Journal British MarkLogic
+        check_command           check_http_url!http://www.nature.com/nclimate/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE16
+        service_description     URL: Nature Article
+        check_command           check_http_url!http://www.nature.com/nature/journal/v495/n7440/full/nature11968.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE16
+        service_description     URL: Nature Article Legacy
+        check_command           check_http_url!http://www.nature.com/bjc/journal/v101/n10/full/6605375a.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+ notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE16
+        service_description     URL: Nature Journal Subscription page
+        max_check_attempts      5
+        check_command           check_http_url!http://www.nature.com/ecommerce/subscribe.action?productId=nature
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE16
+        service_description     URL: News Article using XB3
+        check_command           check_http_url!http://www.nature.com/news/2009/091223/full/news.2009.1159.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE16
+        service_description     URL: Nature Advanced Search
+        check_command           check_http_url!http://www.nature.com/search/adv_search
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE16
+        service_description     URL: Nature Search Results
+        check_command           check_http_url!http://www.nature.com/search/executeSearch?sp-q=cancer
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+ define service{
+        host_name               NPGJ2EE16
+        service_description     URL: Nature News Page
+        check_command           check_http_url!http://www.nature.com/news/
+         max_check_attempts      5
+           check_interval          3
+            retry_interval          3
+            check_period            24x7
+             notification_period     24x7
+            }
+define service{
+        host_name               NPGJ2EE16
+        service_description     URL: www.nature.com/news/2010/100630/full/news.2010.322.html
+        check_command   check_http_url!http://www.nature.com/news/2010/100630/full/news.2010.322.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE17
+        service_description     URL: www.nature.com/news/2010/100630/full/news.2010.322.html
+        check_command           check_http_url!http://www.nature.com/news/2010/100630/full/news.2010.322.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE17
+        service_description     URL: www.nature.com
+        check_command           check_http_url!http://www.nature.com
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE17
+        service_description     URL: Archive nature Journal Current Issue
+        check_command           check_http_url!http://www.nature.com/nature/journal/v453/n7194/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+ define service{
+       host_name               NPGJ2EE17
+       service_description     URL: Nature Current Journal Issue
+       check_command           check_http_url!http://www.nature.com/nature/current_issue.html
+       max_check_attempts      5
+       check_interval          3
+       retry_interval          3
+       check_period            24x7
+       notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE17
+        service_description     URL: AJ Journal British
+        check_command           check_http_url!http://www.nature.com/bjc/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE17
+        service_description     URL: AJ Journal British AOP
+        check_command           check_http_url!http://www.nature.com/bjc/journal/vaop/ncurrent/index.hml
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE17
+        service_description     URL: AJ Journal British Polopoly
+        check_command           check_http_url!http://www.nature.com/nphys/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE17
+        service_description     URL: AJ Journal British MarkLogic
+        check_command           check_http_url!http://www.nature.com/nclimate/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE17
+        service_description     URL: Nature Article
+        check_command           check_http_url!http://www.nature.com/nature/journal/v495/n7440/full/nature11968.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE17
+        service_description     URL: Nature Article Legacy
+        check_command           check_http_url!http://www.nature.com/bjc/journal/v101/n10/full/6605375a.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+ notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE17
+        service_description     URL: Nature Journal Subscription page
+        max_check_attempts      5
+        check_command           check_http_url!http://www.nature.com/ecommerce/subscribe.action?productId=nature
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE17
+        service_description     URL: News Article using XB3
+        check_command           check_http_url!http://www.nature.com/news/2009/091223/full/news.2009.1159.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE17
+        service_description     URL: Nature Advanced Search
+        check_command           check_http_url!http://www.nature.com/search/adv_search
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE17
+        service_description     URL: Nature Search Results
+        check_command           check_http_url!http://www.nature.com/search/executeSearch?sp-q=cancer
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+ define service{
+        host_name               NPGJ2EE17
+        service_description     URL: Nature News Page
+        check_command           check_http_url!http://www.nature.com/news/
+         max_check_attempts      5
+           check_interval          3
+            retry_interval          3
+            check_period            24x7
+             notification_period     24x7
+            }
+define service{
+        host_name               NPGJ2EE17
+        service_description     URL: www.nature.com/news/2010/100630/full/news.2010.322.html
+        check_command   check_http_url!http://www.nature.com/news/2010/100630/full/news.2010.322.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+	host_name	NPGJ2EE18
+	service_description     URL: www.nature.com/news/2010/100630/full/news.2010.322.html
+        check_command   check_http_url!http://www.nature.com/news/2010/100630/full/news.2010.322.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        }
+define service{
+        host_name               NPGJ2EE18
+        service_description     URL: www.nature.com/news/2010/100630/full/news.2010.322.html
+        check_command           check_http_url!http://www.nature.com/news/2010/100630/full/news.2010.322.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE18
+        service_description     URL: www.nature.com
+        check_command           check_http_url!http://www.nature.com
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE18
+        service_description     URL: Archive nature Journal Current Issue
+        check_command           check_http_url!http://www.nature.com/nature/journal/v453/n7194/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+ define service{
+       host_name               NPGJ2EE18
+       service_description     URL: Nature Current Journal Issue
+       check_command           check_http_url!http://www.nature.com/nature/current_issue.html
+       max_check_attempts      5
+       check_interval          3
+       retry_interval          3
+       check_period            24x7
+       notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE18
+        service_description     URL: AJ Journal British
+        check_command           check_http_url!http://www.nature.com/bjc/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE18
+        service_description     URL: AJ Journal British AOP
+        check_command           check_http_url!http://www.nature.com/bjc/journal/vaop/ncurrent/index.hml
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE18
+        service_description     URL: AJ Journal British Polopoly
+        check_command           check_http_url!http://www.nature.com/nphys/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE18
+        service_description     URL: AJ Journal British MarkLogic
+        check_command           check_http_url!http://www.nature.com/nclimate/index.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE18
+        service_description     URL: Nature Article
+        check_command           check_http_url!http://www.nature.com/nature/journal/v495/n7440/full/nature11968.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE18
+        service_description     URL: Nature Article Legacy
+        check_command           check_http_url!http://www.nature.com/bjc/journal/v101/n10/full/6605375a.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+ notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE18
+        service_description     URL: Nature Journal Subscription page
+        max_check_attempts      5
+        check_command           check_http_url!http://www.nature.com/ecommerce/subscribe.action?productId=nature
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE18
+        service_description     URL: News Article using XB3
+        check_command           check_http_url!http://www.nature.com/news/2009/091223/full/news.2009.1159.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE18
+        service_description     URL: Nature Advanced Search
+        check_command           check_http_url!http://www.nature.com/search/adv_search
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+define service{
+        host_name               NPGJ2EE18
+        service_description     URL: Nature Search Results
+        check_command           check_http_url!http://www.nature.com/search/executeSearch?sp-q=cancer
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+ define service{
+        host_name               NPGJ2EE18
+        service_description     URL: Nature News Page
+        check_command           check_http_url!http://www.nature.com/news/
+         max_check_attempts      5
+           check_interval          3
+            retry_interval          3
+            check_period            24x7
+             notification_period     24x7
+            }
+define service{
+        host_name               NPGJ2EE18
+        service_description     URL: www.nature.com/news/2010/100630/full/news.2010.322.html
+        check_command   check_http_url!http://www.nature.com/news/2010/100630/full/news.2010.322.html
+        max_check_attempts      5
+        check_interval          3
+        retry_interval          3
+        check_period            24x7
+        notification_period     24x7
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
