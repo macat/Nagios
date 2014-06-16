@@ -1,5 +1,12 @@
-test:
+demo: &default
   adapter: postgresql
-  host: localhost
-  database: test
-  username: postgres
+  encoding: unicode
+  pool: 5
+  host: <%= ENV['DB_PORT_5432_TCP_ADDR'] %>
+  port: <%= ENV['DB_PORT_5432_TCP_PORT'] %>
+  database: <%= ENV['DB_NAME'] %>
+  username: <%= ENV['DB_USER'] %>
+  password: <%= ENV['DB_PASS'] %>
+
+development:
+  <<: *default
