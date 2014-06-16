@@ -1,0 +1,12 @@
+image: mischief/docker-golang
+env:
+- GOPATH=/var/docker
+script:
+- go build
+- got test -v
+services:
+- redis
+notify:
+email:
+recipients:
+- jeff@namely.com
