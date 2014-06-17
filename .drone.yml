@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 image: bradrydzewski/ruby
 script:
    - cp config/database.drone.yml config/database.yml
@@ -9,3 +10,9 @@ notify:
   email:
   recipients:
    - jeff@namely.com
+=======
+FROM ubuntu:14.04
+MAINTAINER Jeff D <jeff@namely.com>
+RUN apt-get -qq update
+RUN apt-get -qy update
+>>>>>>> c590de0cafe0bd210cc8ad6dd375e64cb75fee79
