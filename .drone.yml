@@ -1,4 +1,4 @@
-image: ubuntu:14.04
+image: bradrydzewski/ruby
 script:
    - cp config/database.drone.yml config/database.yml
    - bundle install
