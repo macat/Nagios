@@ -1,4 +1,4 @@
-image: ruby2.0.0
+image: ubuntu:latest
 script:
    - cp config/database.drone.yml config/database.yml
    - bundle install
