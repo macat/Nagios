@@ -1,11 +1,4 @@
-image: ubuntu:14.04
-script:
-   - cp config/database.drone.yml config/database.yml
-   - bundle install
-   - psql -c 'create database test;' -U postgres -h 127.0.0.1
-   - bundle exec rake db:schema:load
-   - bundle exec rspec spec
-notify:
-  email:
-  recipients:
-   - jeff@namely.com
+FROM ubuntu:14.04
+MAINTAINER Jeff D <jeff@namely.com>
+RUN apt-get -qq update
+RUN apt-get -qy update
