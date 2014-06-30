@@ -1,11 +1,20 @@
-image: bradrydzewski/ruby
+image: amos6224/postql:1
 script:
-   - cp config/database.drone.yml config/database.yml
-   - bundle install
-   - psql -c 'create database test;' -U postgres -h 127.0.0.1
-   - bundle exec rake db:schema:load
-   - bundle exec rspec spec
+  - apt-get update
+  - cp config/database.drone.yml config/database.yml
+  - cp .env.example .env
+  - RAILS_ENV=test bundle exec rake db:test:load
+  - RAILS_ENV=test bundle exec rspec spec
+
 notify:
   email:
-  recipients:
-   - jeff@namely.com
+    recipients:
+      - jeff@namely.com
+      - attila@namely.com
+
+  hipchat:
+    room: CI
+    token: {{hipchat_token}}
+    on_started: true
+    on_success: true
+    on_failure: true
