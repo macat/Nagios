@@ -1,4 +1,4 @@
-image: amos6224/postgresl9.1
+image: amos6224/postgresl
 script:
   - apt-get update
   - cp config/database.drone.yml config/database.yml
