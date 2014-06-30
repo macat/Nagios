@@ -1,4 +1,4 @@
-image: namely
+image: amos6224/postql9
 script:
   - apt-get update
   - cp config/database.drone.yml config/database.yml
