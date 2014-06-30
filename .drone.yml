@@ -10,7 +10,6 @@ notify:
   email:
     recipients:
       - jeff@namely.com
-      - attila@namely.com
 
   hipchat:
     room: CI
