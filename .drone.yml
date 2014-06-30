@@ -1,4 +1,4 @@
-image: namely:latest
+image: namely
 script:
   - apt-get update
   - cp config/database.drone.yml config/database.yml
