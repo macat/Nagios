@@ -1,4 +1,4 @@
-image: jarosser06/ubuntu-ruby-2.1.0
+image: amos6224/postgresl9.2
 script:
   - apt-get update
   - cp config/database.drone.yml config/database.yml
