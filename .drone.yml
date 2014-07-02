@@ -6,7 +6,7 @@ script:
   - /etc/init.d/redis_6379 start
   - apt-get install -y git
   - apt-get install -y imagemagick libxslt1-dev libxml2-dev libpq-dev
-  - psql -c 'create database test;' -U postgres -h 127.0.0.1
+  - psql -c 'create database test;'
   - cp config/database.drone.yml config/database.yml
   - cp .env.example .env
   - bundle install
