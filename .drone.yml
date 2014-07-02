@@ -16,7 +16,7 @@ service:
   - postgres
 
 urls:
-  - http://127.0.0.1/
+  - http://172.17.0.89:3000
 
 notify:
   email:
