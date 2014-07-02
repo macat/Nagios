@@ -1,5 +1,6 @@
 image: amos6224/namely.3
 script:
+  - sleep 10
   - apt-get update
   - apt-get install -y git
   - apt-get install -y screen
@@ -16,7 +17,7 @@ service:
   - postgres
 
 urls:
-  - http://127.0.0.1/
+  - http://172.17.0.89:3000
 
 notify:
   email:
