@@ -1,4 +1,4 @@
-image: amos6224/postgresl9.2
+image: maxmouchet/ruby-git
 script:
   - apt-get update
   - cp config/database.drone.yml config/database.yml
