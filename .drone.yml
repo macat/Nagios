@@ -1,4 +1,4 @@
-image: amos6224/postgresl9.2
+image: amos6224/postgres9.2
 script:
   - apt-get update
   - sleep 10
