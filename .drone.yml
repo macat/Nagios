@@ -10,8 +10,8 @@ script:
   - cd /tmp
   - rails new namely
   - cd namely
-  - RAILS_ENV=test bundle exec rake db:test:load
-  - RAILS_ENV=test bundle exec rspec spec
+  - bundle install
+  - rake db:create:all
 
 notify:
   email:
