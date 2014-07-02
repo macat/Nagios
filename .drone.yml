@@ -1,16 +1,12 @@
-image: amos6224/namely.2
+image: amos6224/namely.3
 script:
   - apt-get update
   - sleep 10
   - /etc/init.d/postgresql start
   - /etc/init.d/redis_6379 start
   - apt-get install -y git
-  - apt-get install -y imagemagick libxslt1-dev libxml2-dev libpq-dev
-  - sudo -u postgres -i
-  - psql -c 'create database test;' 
-  - exit
-  - cp config/database.drone.yml config/database.yml
-  - cp .env.example .env
+  - apt-get install -y imagemagick libxslt1-dev libxml2-dev libpq-dev sqlite3 libsqlite3-dev
+  - rails namely
   - bundle install
   - RAILS_ENV=test bundle exec rake db:test:load
   - RAILS_ENV=test bundle exec rspec spec
