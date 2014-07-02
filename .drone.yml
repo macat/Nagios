@@ -1,9 +1,9 @@
-image: amos6224/postgres9.2
+image: amos6224/namely.1
 script:
   - apt-get update
   - sleep 10
   - /etc/init.d/postgresql start
-  - /etc/init.d/redis start
+  - /etc/init.d/redis_6379 start
   - apt-get install -y git
   - apt-get install -y imagemagick libxslt1-dev libxml2-dev libpq-dev
   - cp config/database.drone.yml config/database.yml
