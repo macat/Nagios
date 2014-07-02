@@ -1,7 +1,7 @@
 image: amos6224/postgresl9.2
 script:
   - apt-get update
-  - sleep 5
+  - sleep 10
   - cp config/database.drone.yml config/database.yml
   - cp .env.example .env
   - RAILS_ENV=test bundle exec rake db:test:load
