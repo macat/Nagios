@@ -5,13 +5,15 @@ script:
   - /etc/init.d/postgresql start
   - /etc/init.d/redis_6379 start
   - apt-get install -y git
+  - apt-get install -y screen
+  - apt-get install -y htop
   - apt-get install -y imagemagick libxslt1-dev libxml2-dev libpq-dev sqlite3 libsqlite3-dev
   - gem install execjs
   - cd /tmp
   - rails new namely
   - cd namely
   - bundle install
-  - rake db:create:all
+  - expose 3000
 
 notify:
   email:
