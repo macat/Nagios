@@ -1,31 +1,27 @@
-image: amos6224/namely.3
-script:
-  - apt-get update
-  - apt-get install -y git
-  - apt-get install -y screen
-  - apt-get install -y htop
-  - apt-get install -y imagemagick libxslt1-dev libxml2-dev libpq-dev sqlite3 libsqlite3-dev
-  - gem install execjs
-  - cd /tmp
-  - rails new namely
-  - cd namely
-  - bundle install
+FROM ubuntu:13.10
 
-service:
-  - redis
-  - postgres
+MAINTAINER Jeff Destine
 
-urls:
-  - http://172.17.0.89:3000
+RUN apt-get update
+RUN apt-get install -y wget gcc make g++ build-essential ca-certificates mercurial git bzr libsqlite3-dev sqlite3
 
-notify:
-  email:
-    recipients:
-      - jeff@namely.com
+RUN wget https://go.googlecode.com/files/go1.2.src.tar.gz && tar zxvf go1.2.src.tar.gz && cd go/src && ./make.bash 
 
-  hipchat:
-    room: CI
-    token: {{hipchat_token}}
-    on_started: true
-    on_success: true
-    on_failure: true
+ENV PATH $PATH:/go/bin:/gocode/bin
+ENV GOPATH /gocode
+
+RUN mkdir -p /gocode/src/github.com/drone
+
+ADD . /gocode/src/github.com/drone/drone
+
+WORKDIR /gocode/src/github.com/drone/drone
+
+RUN make deps
+RUN make
+RUN make install
+
+EXPOSE 80
+
+ENTRYPOINT ["/usr/local/bin/droned"]
+
+CMD ["--port=:80", "--path=/var/lib/drone/drone.sqlite"]
