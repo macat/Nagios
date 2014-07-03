@@ -23,6 +23,7 @@ notify:
   email:
     recipients:
       - jeff@namely.com
+      - brett@namely.com
 
   hipchat:
     room: CI
