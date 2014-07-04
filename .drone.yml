@@ -18,8 +18,7 @@ notify:
   email:
     recipients:
       - jeff@namely.com
-      - brett@namely.com
-
+   
  webhook:
     on_success: true
     on_failure: true
