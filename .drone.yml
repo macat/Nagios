@@ -1,4 +1,4 @@
-image: amos6224/namely.3
+image: amos6224/namely.4
 script:
   - sleep 1
   - apt-get update
