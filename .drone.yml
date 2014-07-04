@@ -4,12 +4,7 @@ script:
   - apt-get install -y nginx
   - apt-get install -y htop
   - apt-get install -y imagemagick libxslt1-dev libxml2-dev libpq-dev sqlite3 libsqlite3-dev
-  - gem install execjs
-  - cd /tmp
-  - rails new namely
-  - cd namely
-  - bundle install
-
+  
 service:
   - redis
   - postgres
