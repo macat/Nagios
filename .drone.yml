@@ -3,7 +3,7 @@ script:
   - sleep 10
   - apt-get update
   - apt-get install -y git
-  - apt-get install -y screen
+  - apt-get install nginx
   - apt-get install -y htop
   - apt-get install -y imagemagick libxslt1-dev libxml2-dev libpq-dev sqlite3 libsqlite3-dev
   - gem install execjs
@@ -16,14 +16,17 @@ service:
   - redis
   - postgres
 
-urls:
-  - http://172.17.0.89:3000
-
 notify:
   email:
     recipients:
       - jeff@namely.com
       - brett@namely.com
+
+ webhook:
+    on_success: true
+    on_failure: true
+    urls:
+      - http://www.namely.com:3000
 
   hipchat:
     room: CI
