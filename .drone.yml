@@ -1,8 +1,1 @@
-image: damon/postgresql
 
-services:
-  - redis
-notify:
-  email:
-    recipients:
-       jeff@namely.com
