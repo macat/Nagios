@@ -2,9 +2,8 @@ image: amos6224/namely.3
 script:
   - apt-get -y update
   - apt-get install -y nginx
-  - apt-get install -y htop
   - apt-get install -y imagemagick libxslt1-dev libxml2-dev libpq-dev sqlite3 libsqlite3-dev
-  
+
 service:
   - redis
   - postgres
@@ -13,7 +12,7 @@ notify:
   email:
     recipients:
       - jeff@namely.com
-   
+
  webhook:
     on_success: true
     on_failure: true
