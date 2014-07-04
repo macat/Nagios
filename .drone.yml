@@ -22,9 +22,6 @@ notify:
       - jeff@namely.com
       - brett@namely.com
       
-webhook:
-    on_success: true
-    on_failure: true
     urls:
       - http://www.namely.com:3000
 
