@@ -1,6 +1,6 @@
 image: amos6224/namely.3
 script:
-  - sleep 10
+  - sleep 1
   - apt-get update
   - apt-get install -y git
   - apt-get install -y screen
