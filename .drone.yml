@@ -1,0 +1,14 @@
+image: amos6224/postqresl9.2
+   script:
+     - apt-get -y update
+     - apt-get install -y git
+     - apt-get install -y nginx
+     - apt-get install -y htop
+     - apt-get install -y imagemagick libxslt1-dev libxml2-dev libpq-dev sqlite3 libs>
+
+    services:
+     - redis
+     - postgres
+
+    notify:
+     - jeff@namely.com
