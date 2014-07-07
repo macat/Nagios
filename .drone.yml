@@ -1,8 +1,4 @@
 image: amos6224/namely.3
-service:
-  - redis
-  - postgres
-
 script:
    - apt-get update
   - apt-get install -y git
@@ -14,6 +10,10 @@ script:
   - rails new namely
   - cd namely
   - bundle install
+  
+service:
+  - redis
+  - postgresql
 
 
 notify:
