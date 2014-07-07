@@ -5,6 +5,7 @@ service:
 
 script:
   - sleep 1
+  - /etc/init.d/postgresql start
   - psql -c 'create database test' -U postgres -h 127.0.0.1
   - apt-get update
   - apt-get install -y git
