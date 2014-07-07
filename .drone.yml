@@ -4,7 +4,6 @@ service:
   - postgres
 
 script:
-  - sleep 1
    - apt-get update
   - apt-get install -y git
   - apt-get install -y screen
