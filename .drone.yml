@@ -1,4 +1,4 @@
-image: amos6224/namely.3
+image: amos6224/namely.4
 script:
    - apt-get update
   - apt-get install -y git
@@ -13,7 +13,7 @@ script:
   
 service:
   - redis
-  - postgresql
+  - postgres
 
 
 notify:
