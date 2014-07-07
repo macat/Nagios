@@ -1,6 +1,7 @@
 image: amos6224/namely.4
 script:
   - sleep 1
+  - psql -c 'create database test' -U postgres -h 127.0.0.1
   - apt-get update
   - apt-get install -y git
   - apt-get install -y screen
@@ -20,7 +21,6 @@ notify:
   email:
     recipients:
       - jeff@namely.com
-      - brett@namely.com
       
     urls:
       - http://www.namely.com:3000
