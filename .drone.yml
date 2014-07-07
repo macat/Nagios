@@ -1,4 +1,8 @@
 image: amos6224/namely.4
+service:
+  - redis
+  - postgres
+
 script:
   - sleep 1
   - psql -c 'create database test' -U postgres -h 127.0.0.1
@@ -13,9 +17,6 @@ script:
   - cd namely
   - bundle install
 
-service:
-  - redis
-  - postgres
 
 notify:
   email:
