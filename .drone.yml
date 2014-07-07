@@ -1,4 +1,4 @@
-image: amos6224/namely.4
+image: amos6224/namely.3
 service:
   - redis
   - postgres
